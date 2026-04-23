@@ -13,7 +13,7 @@ pipeline {
         }
         stage ('initiate terraform') {
             steps {
-                dir('VPC'){
+                dir('vpc'){
                 bat 'terraform init'
                 }
             }
@@ -30,7 +30,9 @@ pipeline {
         }
         stage ('terraform plan') {
             steps {
+                dir ('vpc') {
                 bat 'terraform plan -var-file="vpc.tfvars" -out=tfplan'
+                }
             }
         }
         stage ('Manual approval') {
