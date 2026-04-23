@@ -30,7 +30,7 @@ pipeline {
         }
         stage ('terraform plan') {
             steps {
-                dir ('vpc') {
+                dir('vpc') {
                 bat 'terraform plan -var-file="vpc.tfvars" -out=tfplan'
                 }
             }
