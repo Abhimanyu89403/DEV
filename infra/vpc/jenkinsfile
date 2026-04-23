@@ -13,7 +13,9 @@ pipeline {
         }
         stage ('initiate terraform') {
             steps {
+                dir('VPC'){
                 bat 'terraform init'
+                }
             }
         }
         stage ('format check') {
@@ -33,7 +35,7 @@ pipeline {
         }
         stage ('Manual approval') {
             steps {
-                input message : "DO you want to proceed?" , ok :"Yes,  Apply"
+                input message : "Do you want to proceed?" , ok :"Yes,  Apply"
             }
         }
         stage ('apply the architecture') {
