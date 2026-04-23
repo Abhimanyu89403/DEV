@@ -14,7 +14,6 @@ pipeline {
                 git branch: 'Main', url: 'https://github.com/Abhimanyu89403/DEV.git'
             }
         }
-
         stage ('initiate terraform') {
             steps {
                 dir('infra/alb'){
@@ -23,7 +22,6 @@ pipeline {
                 }
             }
         }
-
         stage ('terraform plan') {
             steps {
                 dir('infra/alb'){
@@ -32,13 +30,11 @@ pipeline {
                 }
             }
         }
-
         stage ('Manual approval') {
             steps {
                 input message : "Do you want to proceed?" , ok :"Yes, Apply"
             }
         }
-
         stage ('apply the architecture') {
             steps {
                 dir('infra/alb'){
@@ -47,7 +43,6 @@ pipeline {
             }
         }
     }
-
     post {
         success {
             echo 'Infrastructure applied successfully'
