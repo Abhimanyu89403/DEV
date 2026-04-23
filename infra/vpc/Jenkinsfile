@@ -13,7 +13,7 @@ pipeline {
         }
         stage ('initiate terraform') {
             steps {
-                dir('/infra/vpc'){
+                dir('infra/vpc'){
                     bat 'dir'
                     bat 'terraform init'
                 }
@@ -21,21 +21,21 @@ pipeline {
         }
         stage ('format check') {
             steps {
-                dir('/infra/vpc'){
+                dir('infra/vpc'){
                     bat 'terraform fmt -check'
                 }
             }
         }
         stage ('validate the code') {
             steps {
-                dir('/infra/vpc'){
+                dir('infra/vpc'){
                     bat 'terraform validate'
                 }
             }
         }
         stage ('terraform plan') {
             steps {
-                dir('/infra/vpc'){
+                dir('infra/vpc'){
                     bat ('dir')
                     bat 'terraform plan -var-file="vpc.tfvars" -out=tfplan'
                 }
@@ -48,7 +48,7 @@ pipeline {
         }
         stage ('apply the architecture') {
             steps {
-                dir('/infra/vpc'){
+                dir('infra/vpc'){
                     bat 'terraform apply tfplan'
             }
         }
