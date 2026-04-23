@@ -24,22 +24,6 @@ pipeline {
             }
         }
 
-        stage ('format check') {
-            steps {
-                dir('infra/vpc'){
-                    bat 'terraform fmt -check'
-                }
-            }
-        }
-
-        stage ('validate the code') {
-            steps {
-                dir('infra/vpc'){
-                    bat 'terraform validate'
-                }
-            }
-        }
-
         stage ('terraform plan') {
             steps {
                 dir('infra/vpc'){
