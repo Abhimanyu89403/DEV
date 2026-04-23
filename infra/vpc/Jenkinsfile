@@ -32,6 +32,14 @@ pipeline {
                 }
             }
         }
+        stage('Debug Files') {
+            steps {
+                bat 'dir'
+                dir('infra/vpc') {
+                    bat 'dir'
+                }
+            }
+        }
         stage ('terraform plan') {
             steps {
                 dir('infra/vpc'){
