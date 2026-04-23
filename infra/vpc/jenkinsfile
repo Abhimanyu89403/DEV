@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage ('Checkout Code') {
             steps {
-                git branch: 'vpc' url: ''
+                git branch: 'Main' url: 'https://github.com/Abhimanyu89403/DEV.git'
             }
         }
         stage ('initiate terraform') {
