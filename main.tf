@@ -90,7 +90,7 @@ resource "aws_lb_listener" "https_listener" {
     }
 }
 
-resource "aws_lb_listener_rule" "api_rule" {
+resource "aws_lb_listener_rule" "be_listener" {
     listener_arn = aws_lb_listener.https_listener.arn
     priority = 10
 
