@@ -26,8 +26,8 @@ resource "aws_ecs_task_definition" "pgagi_fe_task" {
     {
       name   = "fe_container"
       image  = "396608811643.dkr.ecr.ap-south-1.amazonaws.com/prod_cart_repo:f1"
-      cpu    = 1024
-      memory = 2048
+      cpu    = 512
+      memory = 1024
       portMapping = [{
         containerPort = var.fe_port
         host_port = var.fe_port
