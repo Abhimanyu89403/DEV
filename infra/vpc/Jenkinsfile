@@ -14,24 +14,28 @@ pipeline {
         stage ('initiate terraform') {
             steps {
                 dir('vpc'){
-                bat 'terraform init'
+                    bat 'terraform init'
                 }
             }
         }
         stage ('format check') {
             steps {
-                bat 'terraform fmt -check'
+                dir('vpc'){
+                    bat 'terraform fmt -check'
+                }
             }
         }
         stage ('validate the code') {
             steps {
-                bat 'terraform validate'
+                dir('vpc'){
+                    bat 'terraform validate'
+                }
             }
         }
         stage ('terraform plan') {
             steps {
-                dir('vpc') {
-                bat 'terraform plan -var-file="vpc.tfvars" -out=tfplan'
+                dir('vpc'){
+                    bat 'terraform plan -var-file="vpc.tfvars" -out=tfplan'
                 }
             }
         }
