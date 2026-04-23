@@ -14,6 +14,7 @@ pipeline {
         stage ('initiate terraform') {
             steps {
                 dir('/infra/vpc'){
+                    bat 'dir'
                     bat 'terraform init'
                 }
             }
@@ -32,17 +33,10 @@ pipeline {
                 }
             }
         }
-        stage('Debug Files') {
-            steps {
-                bat 'dir'
-                dir('/infra/vpc') {
-                    bat 'dir'
-                }
-            }
-        }
         stage ('terraform plan') {
             steps {
                 dir('/infra/vpc'){
+                    bat ('dir')
                     bat 'terraform plan -var-file="vpc.tfvars" -out=tfplan'
                 }
             }
