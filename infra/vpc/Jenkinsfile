@@ -1,5 +1,7 @@
 pipeline {
-    agent any 
+    agent {
+        label 'terraform-node'
+    }
 
     environment {
         AWS_ACCESS_KEY_ID = credentials('aws-access-key-id')
@@ -42,6 +44,7 @@ pipeline {
         stage ('apply the architecture') {
             steps {
                 dir('infra/vpc'){
+                    bat('dir')
                     bat 'terraform apply tfplan'
                 }
             }
