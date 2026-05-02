@@ -1,20 +1,21 @@
 data "aws_subnet" "public1"{
-    id = "subnet-05207240c37099e10"
+    id = "subnet-0c99670ef9fe048fa"
 }
-
+data "aws_subnet" "public2" {
+    id = "subnet-01adfa173e9bf5284"
+}
+data "aws_security_group" "vpc_sg" {
+    id = "sg-053f8ba38946cb3ce"
+}
 data "aws_vpc" "vpc" {
-    id = "vpc-02799cc9aef39606e"
+    id = "vpc-06c3b905efd13fdf2"
 }
 resource "aws_lb" "pgagi_lb" {
     name = "PGAGI-prod-lb"
     internal = false
     load_balancer_type = "application"
-    subnets = []
-    security_groups = []
-    access_logs {
-        bucket = []
-        enabled = true
-    }
+    subnets = [data.aws_subnet.public1.id , data.aws_subnet.public2.id]
+    security_groups = [data.aws_security_group.vpc_sg.id]
     tags = {
         Environment = "prod"
     }
@@ -26,7 +27,7 @@ resource "aws_lb_target_group" "pgagi_fe_tg" {
     name = "FE-tagret-group"
     port = var.fe_port
     protocol = "HTTP"
-    vpc_id = []
+    vpc_id = [data.aws_vpc.vpc.id]
     target_type = "ip"
     stickiness {
         type = "lb_cookie"
